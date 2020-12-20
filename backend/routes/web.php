@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', 'App\Http\Controllers\PostsController@index');
+Route::get('/', 'App\Http\Controllers\PostsController@index')->name('top');
+Route::resource('posts', 'App\Http\Controllers\PostsController', ['only' => ['create', 'store','show','edit','update','destroy']]);
+Route::resource('comments', 'App\Http\Controllers\CommentsController', ['only' => ['store']]);
+
+Auth::routes();
+
+Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home');
